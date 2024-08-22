@@ -1,0 +1,27 @@
+/* Filters button styling */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .filters button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .filters button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Product list styling */
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
