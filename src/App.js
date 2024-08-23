@@ -7,16 +7,22 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('');
+
 
   const handleSearch = (e) => {
     e.preventDefault();
     // Search functionality
     console.log("Search term:", searchTerm);
   };
+  const handleFilterSelect = (selectedFilter) => {
+    setFilter(selectedFilter);
+    // Bu yerda tanlangan filter asosida mahsulotlarni filtrlashni qo'llang
+  };
 
   return (
     <Router>
-      <NavigationBar handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <NavigationBar  onFilterSelect={handleFilterSelect} handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Container fluid>
         <Row>
           <Col sm={2}>

@@ -1,33 +1,55 @@
-import React from 'react';
-import { Navbar, Nav, Form, Button, FormControl, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Navbar, Nav, Form, FormControl, Button, Container, Dropdown } from 'react-bootstrap';
 
-const NavigationBar = ({ handleSearch, searchTerm, setSearchTerm }) => {
+const NavigationBar = ({ onFilterSelect }) => {
+  const [filter, setFilter] = useState('');
+
+  const handleSelect = (eventKey) => {
+    setFilter(eventKey);
+    if (onFilterSelect) {
+      onFilterSelect(eventKey);  // Filter funksiyasini qo'llash
+    }
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
+        <Navbar.Brand href="#home">
+          <img
+            src="https://via.placeholder.com/150x50?text=UNICORN"
+            alt="Unicorn Logo"
+            style={{ width: '150px', height: '50px' }}
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Brand href="#home">UNICORN</Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Form inline onSubmit={handleSearch} className="mx-auto">
+          <Dropdown onSelect={handleSelect}>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Каталог
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item eventKey="Зимняя одежда">Зимняя одежда</Dropdown.Item>
+              <Dropdown.Item eventKey="Летняя одежда">Летняя одежда</Dropdown.Item>
+              <Dropdown.Item eventKey="Весенняя одежда">Весенняя одежда</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Form className="d-flex ms-auto">
             <FormControl
-              type="text"
-              placeholder="Поиск товаров"
-              className="mr-sm-2"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              type="search"
+              placeholder="Поиск"
+              className="me-2"
+              aria-label="Search"
             />
-            <Button variant="outline-success" type="submit">Поиск</Button>
+            <Button variant="outline-success">Поиск</Button>
           </Form>
-          <Nav>
-            <Nav.Link as={Link} to="/men">Мужчинам</Nav.Link>
-            <Nav.Link as={Link} to="/women">Женщинам</Nav.Link>
-            <Nav.Link as={Link} to="/profile">Профиль</Nav.Link>
+          <Nav className="ms-auto">
+            <Nav.Link href="#register">Регистрация</Nav.Link>
+            <Nav.Link href="#login">Войти</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-};
+}
 
 export default NavigationBar;
