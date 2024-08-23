@@ -1,4 +1,3 @@
-// ProductPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -13,7 +12,11 @@ function ProductPage() {
     // Mahsulot ma'lumotlarini backenddan olish
     axios.get(`http://localhost:5000/projectlogos/${id}`)
       .then(response => {
-        setProduct(response.data);
+        if (response.data) {
+          setProduct(response.data);
+        } else {
+          console.error('Ma\'lumotlar mavjud emas');
+        }
       })
       .catch(error => console.error(error));
   }, [id]);

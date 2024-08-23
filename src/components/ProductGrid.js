@@ -1,32 +1,23 @@
-import React from 'react';
-import { Card, Row, Col, Container } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Product from './Product';
 
-const products = [
-  { id: 1, name: 'Кроссовки и кеды', img: 'url_to_image' },
-  { id: 2, name: 'Обувь для спорта', img: 'url_to_image' },
-  { id: 3, name: 'Кастомные кроссовки', img: 'url_to_image' },
-  { id: 4, name: 'Ботинки', img: 'url_to_image' },
-  { id: 5, name: 'Тапки', img: 'url_to_image' },
-  { id: 6, name: 'Сапоги', img: 'url_to_image' },
-];
+function ProductGrid() {
+  const [products, setProducts] = useState([]);
 
-const ProductGrid = () => {
+  useEffect(() => {
+    axios.get('http://localhost:5000/projectlogos')
+      .then(response => setProducts(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
-    <Container>
-      <Row>
-        {products.map((product) => (
-          <Col key={product.id} sm={6} md={4} lg={3} className="mb-4">
-            <Card>
-              <Card.Img variant="top" src={product.img} />
-              <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div className="product-grid">
+      {products.map(product => (
+        <Product key={product._id} product={product} />
+      ))}
+    </div>
   );
-};
+}
 
 export default ProductGrid;

@@ -1,8 +1,11 @@
-// Product.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Product({ product }) {
+  if (!product || !product._id) {
+    return <div></div>; // yoki boshqa mos xabar
+  }
+
   return (
     <div className="product-card">
       <Link to={`/product/${product._id}`}>

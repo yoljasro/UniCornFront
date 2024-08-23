@@ -24,21 +24,21 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar 
-        onFilterSelect={handleFilterSelect} 
-        handleSearch={handleSearch} 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
+      <NavigationBar
+        onFilterSelect={handleFilterSelect}
+        handleSearch={handleSearch}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
       <Container fluid>
         <Row>
           <Col sm={2}>
-            <Product/>
+            <Product />
           </Col>
           <Col sm={10}>
             <Routes>
-              <Route path="/" element={<ProductGrid />} />
-              <Route path="/product/:id" element={<ProductPage />} /> {/* Yangi marshrut qo'shildi */}
+              <Route path="/" element={<ProductGrid />} /> {/* Mahsulotlar gridini qo'shish */}
+              <Route path="/product/:id" element={<ProductPage />} /> {/* Mahsulot sahifasini ko'rsatish */}
               {/* Qo'shimcha routelar qo'shishingiz mumkin */}
             </Routes>
           </Col>
